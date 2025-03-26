@@ -28,7 +28,7 @@ export default function TermsOfService() {
           <div className="border border-black bg-gray-100 p-4 rounded">
             <h1 className="text-lg font-bold mb-4">terms_of_service.txt</h1>
 
-            <p><strong>🎥 Streaming Notice:</strong> All work is streamed (courtesy) at <a href="https://picarto.tv/Dewclawpaw" className="underline text-blue-700" target="_blank">Picarto</a>.</p>
+            <p><strong>🎥 Streaming Notice:</strong> All work is streamed (courtesy) at <a href="https://picarto.tv/Dewclawpaw" className="underline text-blue-700" target="_blank" rel="noopener noreferrer">Picarto</a>.</p>
 
             <hr className="border-black my-3" />
 
@@ -42,14 +42,14 @@ export default function TermsOfService() {
 
             <hr className="border-black my-3" />
 
-            <p><strong>💵 Billing:</strong> $30/hr. Timer only runs while drawing. Invoices go out after sketch is done. Idle or tabbed-out time is not counted.</p>
+            <p><strong>💵 Billing:</strong> $30/hr. Timer only runs while drawing. Invoices go out after sketch is done.</p>
 
-            <p><strong>🚫 Refunds:</strong> No refunds once work starts. Payment is required upon completion.</p>
+            <p><strong>🚫 Refunds:</strong> {"No refunds once work starts. Payment is required upon completion."}</p>
 
             <hr className="border-black my-3" />
 
-            <p><strong>🖼️ Ownership:</strong> You reserve the rights to your commission.</p>
-            <p><span className="text-red-600 font-bold">⚠️ No use in AI training or ML models allowed.</span></p>
+            <p><strong>🖼️ Ownership:</strong> {"You reserve the rights to your commission."}</p>
+            <p><span className="text-red-600 font-bold">⚠️ {"No use in AI training or ML models allowed."}</span></p>
 
             <hr className="border-black my-3" />
 
@@ -91,29 +91,29 @@ export default function TermsOfService() {
             {/* Content */}
             <div className="p-6 font-sans text-sm text-gray-800 space-y-6">
               <div>
-                <p><strong>Streaming Notice:</strong> All work is done on stream (as a courtesy to clients) via <a href="https://picarto.tv/Dewclawpaw" className="text-blue-600 underline" target="_blank">Picarto</a>.</p>
+                <p><strong>Streaming Notice:</strong> {"All work is done on stream (as a courtesy to clients) via"} <a href="https://picarto.tv/Dewclawpaw" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">Picarto</a>.</p>
               </div>
 
               <div>
-                <p><strong>Commission Requirements:</strong> To start a commission, I need the following:</p>
+                <p><strong>Commission Requirements:</strong> {"To start a commission, I need the following:"}</p>
                 <ul className="list-disc pl-6">
                   <li>Your idea</li>
                   <li>Your reference(s)</li>
                   <li>Your email (for invoicing)</li>
                 </ul>
-                <p className="mt-2">You can DM me on Discord: <strong>dewtheram</strong></p>
+                <p className="mt-2">{"You can DM me on Discord:"} <strong>dewtheram</strong></p>
               </div>
 
               <div>
-                <p><strong>Billing Policy:</strong> I charge <strong>$30 USD/hour</strong>. The timer only runs while I'm actively drawing. Idle or tabbed-out time is not counted. Invoices are sent immediately after the sketch is completed.</p>
+                <p><strong>Billing Policy:</strong> {"I charge $30 USD/hour. The timer only runs while I'm actively drawing (idle/tabbed-out time is not counted). Invoices are sent immediately after the sketch is completed."}</p>
               </div>
 
               <div>
-                <p><strong>Refund Policy:</strong> I do <u>not</u> accept refunds once work has begun. Final payment is required upon completion.</p>
+                <p><strong>Refund Policy:</strong> {"I do not accept refunds once work has begun. Final payment is required upon completion."}</p>
               </div>
 
               <div>
-                <p><strong>Ownership & Usage:</strong> You reserve the rights to the artwork you commission from me. However, my art <u>may not</u> be used in any AI data training or machine learning model, under any circumstances.</p>
+                <p><strong>Ownership & Usage:</strong> {"You reserve the rights to the artwork you commission from me. However, my art may not be used in any AI data training or machine learning model, under any circumstances."}</p>
               </div>
 
               <div>
