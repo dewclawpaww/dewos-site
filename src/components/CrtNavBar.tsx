@@ -1,10 +1,11 @@
 // src/components/CrtNavBar.tsx
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
-export default function CrtNavBar() {
-  const { pathname } = useRouter()
+type CrtNavBarProps = {
+  current?: string
+}
 
+export default function CrtNavBar({ current }: CrtNavBarProps) {
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/commissions', label: 'Commissions' },
@@ -22,7 +23,7 @@ export default function CrtNavBar() {
           href={href}
           className={`
             hover:underline
-            ${pathname === href ? 'text-gray-500 pointer-events-none' : ''}
+            ${current === label ? 'text-gray-500 pointer-events-none' : ''}
           `}
         >
           {label}
