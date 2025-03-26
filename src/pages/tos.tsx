@@ -42,7 +42,7 @@ export default function TermsOfService() {
 
             <hr className="border-black my-3" />
 
-            <p><strong>💵 Billing:</strong> $30/hr. Timer only runs while drawing. Invoices go out after sketch is done.</p>
+            <p><strong>💵 Billing:</strong> $30/hr. Timer only runs while drawing. Invoices go out after sketch is done. Idle or tabbed-out time is not counted.</p>
 
             <p><strong>🚫 Refunds:</strong> No refunds once work starts. Payment is required upon completion.</p>
 
@@ -105,7 +105,7 @@ export default function TermsOfService() {
               </div>
 
               <div>
-                <p><strong>Billing Policy:</strong> I charge <strong>$30 USD/hour</strong>. The timer only runs while I'm actively drawing (idle/tabbed-out time is not counted). Invoices are sent immediately after the sketch is completed.</p>
+                <p><strong>Billing Policy:</strong> I charge <strong>$30 USD/hour</strong>. The timer only runs while I'm actively drawing. Idle or tabbed-out time is not counted. Invoices are sent immediately after the sketch is completed.</p>
               </div>
 
               <div>
