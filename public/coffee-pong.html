@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>coffee-pong.gb</title>
+  <style>
+    /* 
+      The canvas is 320×240 for internal logic,
+      but we set width:100%/height:100% in CSS to scale to the parent container.
+    */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #d4b866;
+      font-family: monospace;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    #game-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      image-rendering: pixelated;
+      background: #f3e7b2;
+      border: 8px solid #6b4e1e;
+      box-shadow: 0 0 12px #000;
+    }
+    .scanlines {
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.05) 0px,
+        rgba(0, 0, 0, 0.05) 1px,
+        transparent 2px,
+        transparent 4px
+      );
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <!-- The canvas is logically 320x240, but visually scaled to fill parent. -->
+    <canvas id="game" width="320" height="240"></canvas>
+    <div class="scanlines"></div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+
+    const paddleWidth = 6;
+    const paddleHeight = 40;
+    const playerX = 10;
+    const aiX = canvas.width - paddleWidth - 10;
+
+    let playerY = canvas.height / 2 - paddleHeight / 2;
+    let aiY = canvas.height / 2 - paddleHeight / 2;
+
+    const ballSize = 6;
+    let ballX = canvas.width / 2;
+    let ballY = canvas.height / 2;
+    let ballSpeedX = 2.5;
+    let ballSpeedY = 2;
+
+    let lives = 3;
+    let score = 0;
+    const coffeeIcon = '☕';
+
+    // Mouse-based movement
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const mouseY = e.clientY - rect.top;
+      // Convert mouseY to the 320×240 logic space
+      playerY = (mouseY / rect.height) * canvas.height - paddleHeight / 2;
+    });
+
+    function drawPaddle(x, y) {
+      ctx.fillStyle = '#3c2e0d';
+      ctx.fillRect(x, y, paddleWidth, paddleHeight);
+    }
+
+    function drawBall() {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(ballX, ballY, ballSize, ballSize);
+    }
+
+    function drawLives() {
+      ctx.fillStyle = '#3c2e0d';
+      ctx.font = '16px monospace';
+      for (let i = 0; i < lives; i++) {
+        ctx.fillText(coffeeIcon, 10 + i * 20, 20);
+      }
+    }
+
+    function drawScore() {
+      ctx.fillStyle = '#3c2e0d';
+      ctx.font = '16px monospace';
+      ctx.fillText(`SCORE: ${score}`, 200, 20);
+    }
+
+    function resetBall() {
+      ballX = canvas.width / 2;
+      ballY = canvas.height / 2;
+      ballSpeedX = -ballSpeedX;
+      ballSpeedY = (Math.random() * 4 - 2);
+    }
+
+    function update() {
+      // Move ball
+      ballX += ballSpeedX;
+      ballY += ballSpeedY;
+
+      // Bounce top/bottom
+      if (ballY <= 0 || ballY + ballSize >= canvas.height) {
+        ballSpeedY *= -1;
+      }
+
+      // Player paddle collision
+      if (
+        ballX <= playerX + paddleWidth &&
+        ballY + ballSize >= playerY &&
+        ballY <= playerY + paddleHeight
+      ) {
+        ballSpeedX *= -1;
+        ballX = playerX + paddleWidth;
+      }
+
+      // AI movement
+      const aiCenter = aiY + paddleHeight / 2;
+      if (aiCenter < ballY - 10) aiY += 1.5;
+      else if (aiCenter > ballY + 10) aiY -= 1.5;
+
+      // AI paddle collision
+      if (
+        ballX + ballSize >= aiX &&
+        ballY + ballSize >= aiY &&
+        ballY <= aiY + paddleHeight
+      ) {
+        ballSpeedX *= -1;
+        ballX = aiX - ballSize;
+      }
+
+      // Player misses
+      if (ballX < 0) {
+        lives--;
+        if (lives > 0) {
+          resetBall();
+        } else {
+          alert(`☕ Out of coffee.\nFinal Score: ${score}`);
+          lives = 3;
+          score = 0;
+          resetBall();
+        }
+      }
+
+      // AI misses => Score
+      if (ballX > canvas.width) {
+        score++;
+        resetBall();
+      }
+
+      // Clear
+      ctx.fillStyle = '#f3e7b2';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw
+      drawPaddle(playerX, playerY);
+      drawPaddle(aiX, aiY);
+      drawBall();
+      drawLives();
+      drawScore();
+    }
+
+    function gameLoop() {
+      update();
+      requestAnimationFrame(gameLoop);
+    }
+
+    gameLoop();
+  </script>
+</body>
+</html>
